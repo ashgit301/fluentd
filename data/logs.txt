@@ -1,0 +1,10 @@
+2020/10/15 11:37:32 inserting data into the db
+2020/10/15 11:56:38 entering the getallData call
+2020/10/15 11:56:38 @@@@@@@@@@@@@@@@@@@@@@@
+2020/10/15 11:56:38 fetched all data from db
+2020/10/15 11:57:21 entering the getallData call
+2020/10/15 11:57:21 @@@@@@@@@@@@@@@@@@@@@@@
+2020/10/15 11:57:21 fetched all data from db
+2020/10/15 11:58:11 entering the getallData call
+2020/10/15 11:58:11 @@@@@@@@@@@@@@@@@@@@@@@
+2020/10/15 11:58:11 fetched all data from db

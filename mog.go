@@ -142,7 +142,7 @@ func delete(w http.ResponseWriter, r *http.Request) {
 	Name := params["name"]
 	c.Remove(bson.M{"name": Name})
 	log.Println("deleting data from db")
-	log.SetOutput(file)
+	//log.SetOutput(file)
 	//w.Write([]byte(`{"message":"deleting data from db"}`))
 }
 func main() {

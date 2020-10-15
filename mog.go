@@ -77,7 +77,7 @@ var c = session.DB("trydb").C("trycollection")
 
 func getAll(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	file, _ := os.OpenFile("/data/logs.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	file, _ := os.OpenFile("data/logs.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 	log.SetOutput(file)
 	log.Println("entering the getallData call")
 	log.Println("@@@@@@@@@@@@@@@@@@@@@@@")
@@ -89,7 +89,7 @@ func getAll(w http.ResponseWriter, r *http.Request) {
 }
 func getOne(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	file, _ := os.OpenFile("/data/logs.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	file, _ := os.OpenFile("data/logs.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 	log.SetOutput(file)
 	log.Println("@@@@@@@@@@@@@@@@@@@@@@@")
 	log.Println("entering the getoneData call")
@@ -103,7 +103,7 @@ func getOne(w http.ResponseWriter, r *http.Request) {
 
 }
 func insertData(w http.ResponseWriter, r *http.Request) {
-	file, _ := os.OpenFile("/data/logs.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	file, _ := os.OpenFile("data/logs.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 	log.SetOutput(file)
 	log.Println("entering the insertData call")
 	log.Println("@@@@@@@@@@@@@@@@@@@@@@@")
@@ -119,7 +119,7 @@ func insertData(w http.ResponseWriter, r *http.Request) {
 
 func updateData(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	file, _ := os.OpenFile("/data/logs.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	file, _ := os.OpenFile("data/logs.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 	log.SetOutput(file)
 	log.Println("entering the updateData call")
 	log.Println("@@@@@@@@@@@@@@@@@@@@@@@")
@@ -133,7 +133,7 @@ func updateData(w http.ResponseWriter, r *http.Request) {
 }
 
 func delete(w http.ResponseWriter, r *http.Request) {
-	file, _ := os.OpenFile("/data/logs.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	file, _ := os.OpenFile("data/logs.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 	log.SetOutput(file)
 	log.Println("entering the deleteData call")
 	log.Println("@@@@@@@@@@@@@@@@@@@@@@@")
@@ -142,7 +142,7 @@ func delete(w http.ResponseWriter, r *http.Request) {
 	Name := params["name"]
 	c.Remove(bson.M{"name": Name})
 	log.Println("deleting data from db")
-	//log.SetOutput(file)
+	log.SetOutput(file)
 	//w.Write([]byte(`{"message":"deleting data from db"}`))
 }
 func main() {

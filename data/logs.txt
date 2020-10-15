@@ -8,3 +8,15 @@
 2020/10/15 11:58:11 entering the getallData call
 2020/10/15 11:58:11 @@@@@@@@@@@@@@@@@@@@@@@
 2020/10/15 11:58:11 fetched all data from db
+2020/10/15 12:45:22 entering the getallData call
+2020/10/15 12:45:22 @@@@@@@@@@@@@@@@@@@@@@@
+2020/10/15 12:45:22 fetched all data from db
+2020/10/15 12:48:41 entering the getallData call
+2020/10/15 12:48:41 @@@@@@@@@@@@@@@@@@@@@@@
+2020/10/15 12:48:41 fetched all data from db
+2020/10/15 12:48:52 @@@@@@@@@@@@@@@@@@@@@@@
+2020/10/15 12:48:52 entering the getoneData call
+2020/10/15 12:48:52 fetched single data from db
+2020/10/15 12:56:48 entering the deleteData call
+2020/10/15 12:56:48 @@@@@@@@@@@@@@@@@@@@@@@
+2020/10/15 12:56:48 deleting data from db

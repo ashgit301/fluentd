@@ -20,3 +20,6 @@
 2020/10/15 12:56:48 entering the deleteData call
 2020/10/15 12:56:48 @@@@@@@@@@@@@@@@@@@@@@@
 2020/10/15 12:56:48 deleting data from db
+2020/10/15 13:25:57 entering the getallData call
+2020/10/15 13:25:57 @@@@@@@@@@@@@@@@@@@@@@@
+2020/10/15 13:25:57 fetched all data from db

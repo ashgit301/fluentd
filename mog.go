@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -19,7 +18,9 @@ type Person struct {
 }
 
 var session, _ = mgo.Dial("localhost:27017")
-var c = session.DB("trydb").C("trycollection")
+
+//var c = session.DB("trydb").C("trycollection")
+var c = session.DB(os.Getenv("DB")).C(os.Getenv("COLLECTION"))
 
 // func AddLogs() {
 // 	fmt.Printf("Writing to a file in Go lang\n")
@@ -77,7 +78,7 @@ var c = session.DB("trydb").C("trycollection")
 
 func getAll(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	file, _ := os.OpenFile("data/logs.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	file, _ := os.OpenFile("/data/logs.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 	log.SetOutput(file)
 	log.Println("entering the getallData call")
 	log.Println("@@@@@@@@@@@@@@@@@@@@@@@")
@@ -89,7 +90,7 @@ func getAll(w http.ResponseWriter, r *http.Request) {
 }
 func getOne(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	file, _ := os.OpenFile("data/logs.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	file, _ := os.OpenFile("/data/logs.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 	log.SetOutput(file)
 	log.Println("@@@@@@@@@@@@@@@@@@@@@@@")
 	log.Println("entering the getoneData call")
@@ -103,23 +104,25 @@ func getOne(w http.ResponseWriter, r *http.Request) {
 
 }
 func insertData(w http.ResponseWriter, r *http.Request) {
-	file, _ := os.OpenFile("data/logs.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	file, _ := os.OpenFile("/data/logs.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 	log.SetOutput(file)
 	log.Println("entering the insertData call")
 	log.Println("@@@@@@@@@@@@@@@@@@@@@@@")
 	w.Header().Set("Content-Type", "application/json")
 	var data Person
 	json.NewDecoder(r.Body).Decode(&data)
-	fmt.Println(data)
-	c.Insert(&data)
+	//fmt.Println(data)
+	//c.Insert(&data)
+	//json.NewEncoder(w).Encode(c.Insert(&data))
 	log.Println("inserting data into the db")
-	//w.Write([]byte(`{"message":"inserting data from db"}`))
+	// message := "{message:  inserting data from db}"
+	// w.Write([]byte(message))
 	//json.NewEncoder(w).Encode(data)
 }
 
 func updateData(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	file, _ := os.OpenFile("data/logs.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	file, _ := os.OpenFile("/data/logs.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 	log.SetOutput(file)
 	log.Println("entering the updateData call")
 	log.Println("@@@@@@@@@@@@@@@@@@@@@@@")
@@ -133,7 +136,7 @@ func updateData(w http.ResponseWriter, r *http.Request) {
 }
 
 func delete(w http.ResponseWriter, r *http.Request) {
-	file, _ := os.OpenFile("data/logs.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	file, _ := os.OpenFile("/data/logs.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 	log.SetOutput(file)
 	log.Println("entering the deleteData call")
 	log.Println("@@@@@@@@@@@@@@@@@@@@@@@")
@@ -142,8 +145,8 @@ func delete(w http.ResponseWriter, r *http.Request) {
 	Name := params["name"]
 	c.Remove(bson.M{"name": Name})
 	log.Println("deleting data from db")
-	log.SetOutput(file)
-	//w.Write([]byte(`{"message":"deleting data from db"}`))
+	//log.SetOutput(file)
+	w.Write([]byte("deleting"))
 }
 func main() {
 	router := mux.NewRouter()

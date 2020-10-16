@@ -17,11 +17,11 @@ type Person struct {
 	IsMale bool   `json:"isMale" bson:"isMale"`
 }
 
-var session, _ = mgo.Dial("person-mongo:27017")
+var session, _ = mgo.Dial("localhost:27017")
 
-//var c = session.DB("trydb").C("trycollection")
+var c = session.DB("trydb").C("trycollection")
 
-var c = session.DB(os.Getenv("DB")).C(os.Getenv("COLLECTION"))
+//var c = session.DB(os.Getenv("DB")).C(os.Getenv("COLLECTION"))
 
 // func AddLogs() {
 // 	fmt.Printf("Writing to a file in Go lang\n")
@@ -84,7 +84,10 @@ func getAll(w http.ResponseWriter, r *http.Request) {
 	log.Println("entering the getallData call")
 	log.Println("@@@@@@@@@@@@@@@@@@@@@@@")
 	result := []Person{}
-	c.Find(bson.M{}).All(&result)
+	l := c.Find(bson.M{}).All(&result)
+	if l != nil {
+		log.Println(l)
+	}
 	json.NewEncoder(w).Encode(result)
 	log.Println("fetched all data from db")
 	//w.Write([]byte(`{"message":"fetching data from db"}`))
@@ -98,7 +101,10 @@ func getOne(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	Name := params["name"]
 	var data Person
-	c.Find(bson.M{"name": Name}).One(&data)
+	l := c.Find(bson.M{"name": Name}).One(&data)
+	if l != nil {
+		log.Println(l)
+	}
 	json.NewEncoder(w).Encode(data)
 	log.Println("fetched single data from db")
 	//w.Write([]byte(`{"message":"fetching one data from db"}`))
@@ -113,7 +119,10 @@ func insertData(w http.ResponseWriter, r *http.Request) {
 	var data Person
 	json.NewDecoder(r.Body).Decode(&data)
 	//fmt.Println(data)
-	//c.Insert(&data)
+	l := c.Insert(&data)
+	if l != nil {
+		log.Println(l)
+	}
 	//json.NewEncoder(w).Encode(c.Insert(&data))
 	log.Println("inserting data into the db")
 	// message := "{message:  inserting data from db}"
@@ -131,7 +140,10 @@ func updateData(w http.ResponseWriter, r *http.Request) {
 	Name := params["name"]
 	var data Person
 	json.NewDecoder(r.Body).Decode(&data)
-	c.Update(bson.M{"name": Name}, bson.M{"$set": bson.M{"name": data.Name, "age": data.Age, "isMale": data.IsMale}})
+	l := c.Update(bson.M{"name": Name}, bson.M{"$set": bson.M{"name": data.Name, "age": data.Age, "isMale": data.IsMale}})
+	if l != nil {
+		log.Println(l)
+	}
 	log.Println("updating data in the db")
 	//w.Write([]byte(`{"message":"updating data into db"}`))
 }
@@ -144,7 +156,10 @@ func delete(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	params := mux.Vars(r)
 	Name := params["name"]
-	c.Remove(bson.M{"name": Name})
+	l := c.Remove(bson.M{"name": Name})
+	if l != nil {
+		log.Println(l)
+	}
 	log.Println("deleting data from db")
 	//log.SetOutput(file)
 	w.Write([]byte("deleting"))

@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/globalsign/mgo"
 	"github.com/gorilla/mux"
+	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 )
 
@@ -17,9 +17,10 @@ type Person struct {
 	IsMale bool   `json:"isMale" bson:"isMale"`
 }
 
-var session, _ = mgo.Dial("person-service:27017")
+var session, _ = mgo.Dial("person-mongo:27017")
 
 //var c = session.DB("trydb").C("trycollection")
+
 var c = session.DB(os.Getenv("DB")).C(os.Getenv("COLLECTION"))
 
 // func AddLogs() {

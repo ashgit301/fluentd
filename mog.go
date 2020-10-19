@@ -19,9 +19,9 @@ type Person struct {
 
 var session, _ = mgo.Dial("person-mongo:27017")
 
-//var c = session.DB("trydb").C("trycollection")
+var c = session.DB("trydb").C("trycollection")
 
-var c = session.DB(os.Getenv("DB")).C(os.Getenv("COLLECTION"))
+//var c = session.DB(os.Getenv("DB")).C(os.Getenv("COLLECTION"))
 
 // func AddLogs() {
 // 	fmt.Printf("Writing to a file in Go lang\n")
